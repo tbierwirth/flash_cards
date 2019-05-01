@@ -1,23 +1,21 @@
-require './lib/card.rb'
-
 class Turn
-  attr_reader :string, :card
+  attr_reader :guess, :card
 
-  def initialize(string, card)
-    @guess = string
+  def initialize(guess, card)
+    @guess = guess
     @card = card
   end
 
-  def guess
-  end
-
-  def card
-
-  end
-
   def correct?
+    if @guess == @card.answer
+      return true
+    elsif
+      @guess != @card.answer
+      return false
+    end
   end
 
   def feedback
+
   end
 end
