@@ -16,6 +16,10 @@ class Turn
   end
 
   def feedback
-
+    if @guess == @answer
+      put "Correct!"
+    elsif @guess != @answer
+      put "Incorrect!"
+    end
   end
 end
