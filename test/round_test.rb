@@ -1,6 +1,7 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/card'
+require './lib/turn'
 require './lib/deck'
 require './lib/round'
 
@@ -16,8 +17,24 @@ class RoundTest < Minitest::Test
     @round = Round.new(@deck)
   end
 
+  def test_the_deck
+    assert_instance_of Deck, @deck
+  end
+
   def test_the_round
     assert_instance_of Round, @round
+  end
+
+  def test_deck_in_round
+    assert_equal @deck, @round.deck
+  end
+
+  def test_for_no_turns
+    assert_equal [], @round.turns
+  end
+
+  def test_current_card
+    assert_equal @card_1, @round.current_card
   end
 
 end
