@@ -15,7 +15,7 @@ class RoundTest < Minitest::Test
     @deck = Deck.new(@cards)
 
     @round = Round.new(@deck)
-    @new_turn = @round.take_turn(@guess)
+    # @new_turn = @round.take_turn(@guess)
   end
 
   def test_the_deck
@@ -39,9 +39,26 @@ class RoundTest < Minitest::Test
   end
 
   def test_new_turn
+    turn = Turn.new("Juneau", @card_1)
+    new_turn = @round.take_turn("Juneau")
 
-#    assert_equal @new_turn, @round.take_turn("Juneau")
-    assert_equal @new_turn.class, Turn
+    assert_equal turn.card, new_turn.card
+    assert_equal turn.guess, new_turn.guess
+    assert_equal new_turn.class, Turn
+    assert_equal new_turn.correct?, true
+    # assert_equal new_turn, @round.turns
+  end
+
+  def test_it_tracks_turns
+    new_turn = @round.take_turn("Juneau")
+
+    assert_equal [new_turn], @round.turns
+  end
+
+  def test_to_move_to_next_card
+    assert_equal @card_1, @round.current_card
+    @round.move_to_next_card
+    assert_equal @card_2, @round.current_card
   end
 
 end
