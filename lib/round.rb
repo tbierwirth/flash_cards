@@ -1,18 +1,23 @@
 require 'pry'
 class Round
-  attr_reader :deck, :turns, :current_card
+  attr_reader :deck, :turns, :current_card, :number_correct
 
   def initialize(deck)
     @deck = deck
     @turns = []
     @current_card = deck.cards[0]
+    @number_correct = 0
   end
 
   def take_turn(guess)
     new_turn = Turn.new(guess, current_card)
     add_turn_to_turns(new_turn)
-#    move_to_next_card
+    move_to_next_card
     new_turn
+  end
+
+  def count
+    @turn.length
   end
 
   def add_turn_to_turns(new_turn)
@@ -25,8 +30,9 @@ class Round
     @current_card = deck.cards[next_index]
   end
 
-  def correct?
-    @guess == @card.answer
+  def number_correct
+    @guess == @current_card.answer
+    @number_correct += 1
   end
 
 end
