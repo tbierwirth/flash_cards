@@ -54,7 +54,15 @@ class RoundTest < Minitest::Test
   def test_number_correct
     @round.take_turn("Juneau")
     @round.take_turn("Venus")
+
     assert_equal 1, @round.number_correct
+  end
+
+  def test_number_correct_by_category
+    @round.take_turn("Juneau")
+    @round.take_turn("Venus")
+
+    assert_equal 1, @round.number_correct_per_category(category)
   end
 
   def test_it_tracks_turns
