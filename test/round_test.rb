@@ -4,8 +4,10 @@ require './lib/card'
 require './lib/turn'
 require './lib/deck'
 require './lib/round'
+require 'pry'
 
 class RoundTest < Minitest::Test
+
   def setup
     @card_1 = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
     @card_2 = Card.new("The Viking spacecraft sent back to Earth photographs and reports about the surface of which planet?", "Mars", :STEM)
@@ -47,6 +49,12 @@ class RoundTest < Minitest::Test
     assert_equal new_turn.class, Turn
     assert_equal new_turn.correct?, true
     # assert_equal new_turn, @round.turns
+  end
+
+  def test_number_correct
+    @round.take_turn("Juneau")
+    @round.take_turn("Venus")
+    assert_equal 1, @round.number_correct
   end
 
   def test_it_tracks_turns
