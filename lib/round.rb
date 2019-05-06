@@ -1,4 +1,3 @@
-require 'pry'
 class Round
   attr_reader :deck, :turns, :current_card, :number_correct
 
@@ -43,16 +42,15 @@ class Round
     end
   end
 
-  def play
-    puts "Welcome! You're playing with #{@deck.count} cards."
+  def start
+    puts "Welcome to flash cards. You're playing with #{@deck.count} cards."
     puts "-------------------------------------------------"
-      while @turn.length < @deck.count
-        @deck.count do
-          puts "This is card number @{turns.length} of #{deck.count}"
+      while @turns.length < @deck.count do
+          puts "This is card number #{turns.length} of #{deck.count}"
           puts @current_card.question
           take_turn(gets.chomp)
-        end
-    puts "****** Game over! ******"
+      end
+        puts "****** Game over! ******"
         puts "You got #{number_correct} out of #{deck.count} for a total score of %#{percent_correct}"
    end
 end
