@@ -12,6 +12,9 @@ class Round
   def take_turn(guess)
     new_turn = Turn.new(guess, current_card)
     add_turn_to_turns(new_turn)
+    if new_turn.correct?
+      @number_correct += 1
+    end
     move_to_next_card
     new_turn
   end
@@ -30,9 +33,14 @@ class Round
     @current_card = deck.cards[next_index]
   end
 
-  def number_correct
-    @guess == @current_card.answer
-    @number_correct += 1
+  def percent_correct
+    (number_correct.to_f / @turns.length * 100).round(2)
+  end
+
+  def number_correct_per_category(category)
+    @turns.count do |turn|
+      turn.correct? && turn.card.category == category
+    end
   end
 
 end
